@@ -35,6 +35,32 @@ db.serialize(() => {
             FOREIGN KEY(video_id) REFERENCES videos(id)
         )
     `);
+
+  db.run(`
+      CREATE TABLE IF NOT EXISTS subtitulos(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+        video_id INTEGER NOT NULL,
+        escena_id INTEGER NOT NULL,
+
+        numero INTEGER NOT NULL,
+
+        texto TEXT NOT NULL,
+
+        inicio REAL NOT NULL,
+        fin REAL NOT NULL,
+
+        FOREIGN KEY(video_id)
+          REFERENCES videos(id)
+          ON DELETE CASCADE
+          ON UPDATE CASCADE,
+
+        FOREIGN KEY(escena_id)
+          REFERENCES escenas(id)
+          ON DELETE CASCADE
+          ON UPDATE CASCADE
+    )
+    `);
 });
 
 function crearVideo(titulo, textoOriginal) {

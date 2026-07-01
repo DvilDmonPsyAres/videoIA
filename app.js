@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/api/chat", async (req, res) => {
+  console.log("posteaando IA");
   try {
     const { prompt } = req.body;
 
@@ -103,7 +104,7 @@ app.post("/api/chat", async (req, res) => {
       texto: promptEscenas.dialogo,
       escenas,
     });
-    console.log("terminando crear proyecto");
+    console.log("crear proyecto terminado");
     res.json({
       videoId: proyecto.videoId,
       respuesta: promptEscenas.dialogo,
